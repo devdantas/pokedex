@@ -16,9 +16,6 @@ const getJSON = async (req, res) => {
 }
 
 const list = (param) => {
-  // console.log(search.value.toLowerCase())
-  // console.log(isNaN(search.value))
-
   switch (isNaN(search.value)) {
     case true:
       res = param.filter(item => {
@@ -47,12 +44,12 @@ function verifica(res){
     let timer = setInterval(() => {
       clearInterval(timer)
       loading.style.display = 'none'
-      container.innerHTML = createPoke(res).toString().replace(/,/g,"")
+      container.innerHTML = createCard(res).toString().replace(/,/g,"")
     }, 3000); 
   }
 }
 
-function createPoke(res) {
+function createCard(res) {
     let card = []
     let icon = []
     let i=0
@@ -61,36 +58,32 @@ function createPoke(res) {
         for (const itemTy of item.type) {
           icon.push(`<img src="./img/icons_type/Icon_${itemTy}.png" class="icon__type">`)
         }
-        card.push(`
-          <div class="break"></div>
-          <div class="poke__main">
-            <img src="${item.img}" alt="Sprite of ${item.name}" class="poke__photo"> 
-              <div class="poke__name">
-                <h2>${item.name}</h2>
-              </div>
-              <div class="poke__attr">
-                ${icon}
-              </div>          
-          </div>`)
+        card.push('<div class="break"></div>' + bodyItem(icon, item.img, item.name))
           icon = []
       }else{
         for (const itemTy of item.type) {
           icon.push(`<img src="./img/icons_type/Icon_${itemTy}.png" class="icon__type">`)
         }
-        card.push(`
-          <div class="poke__main">
-            <img src="${item.img}" alt="Sprite of ${item.name}" class="poke__photo">  
-              <div class="poke__name">
-                <h2>${item.name}</h2>
-              </div>
-              <div class="poke__attr">
-                ${icon}
-              </div>            
-          </div>`)
+        card.push(bodyItem(icon, item.img, item.name))
         icon = []
       }
       i++      
     }
     return card
 }
+
+function bodyItem(icon, itemImg, itemName){
+  let body = "";
+  body = `<div class="poke__main">
+          <img src="${itemImg}" alt="Sprite of ${itemName}" class="poke__photo">  
+            <div class="poke__name">
+              <h2>${itemName}</h2>
+            </div>
+            <div class="poke__attr">
+              ${icon}
+            </div>            
+        </div>`
+  return body  
+}
+
 button.onclick = getJSON
