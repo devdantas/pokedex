@@ -64,6 +64,7 @@ body {
   background-color: white;
   border-radius: 5px;
   margin: 5px;
+  padding: 3px;
 }
 .poke__main img {
   width: 120px;
@@ -86,13 +87,23 @@ body {
   flex-direction: column;
 }
 .pokeball {
-  width: 70px;
-  height: 70px;
   background-color: white;
   border-radius: 50%;
-  animation: bounce 2.5s infinite;
+  border: 1px solid black;
   align-self: center;
 }
+
+/* define widths */
+.pokeball__wone{  
+  width: 70px;
+  height: 70px;
+}
+.pokeball__wtwo{  
+  width: 30px;
+  height: 30px;
+}
+
+
 .pokeball .poke__red {
   width: 100%;
   height: 50%;  
@@ -103,18 +114,37 @@ body {
   width: 100%;
   height: 10%;
   background-color: black;
-  border-radius: 0 0 4px 4px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.pokeball .poke__black .circle__w {
+
+/* circle center pokeball */
+.circle__one { 
   width: 15px;
   height: 15px;
   background-color: white;
   border-radius: 100%;
   border: 5px solid black;
 }
+.circle__two { 
+  width: 7px;
+  height: 7px;
+  background-color: white;
+  border-radius: 100%;
+  border: 3px solid black;
+}
+
+.poke__main:hover .circle__two {
+  animation: fa-blink 1.5s linear infinite;
+}
+.poke__main:hover .pokeball__wtwo {
+  animation: rotate-90-cw 1.5s linear infinite alternate;
+}
+.poke__main:hover{
+  cursor: pointer;
+}
+
 .shadow {
   width: 80px;
   height: 30px;
@@ -125,6 +155,11 @@ body {
   align-self: center;
   filter: blur(2px);
   animation: shadow 2.5s linear infinite;
+}
+
+/* animation class */
+.animation__bounce {  
+  animation: bounce 2.5s infinite;
 }
 
 @keyframes bounce {
@@ -138,5 +173,18 @@ body {
   }
   50% {
     transform: scale(.5);
+  }
+}
+@keyframes fa-blink  {
+  50% { 
+    background-color: rgb(255, 0, 0);     
+  }
+}
+@keyframes rotate-90-cw {
+  0% {
+     transform: rotate(20deg);
+  }
+  100% {
+     transform: rotate(-20deg);
   }
 }
