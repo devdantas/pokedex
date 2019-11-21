@@ -139,7 +139,7 @@ body {
   animation: fa-blink 1.5s linear infinite;
 }
 .poke__main:hover .pokeball__wtwo {
-  animation: rotate-90-cw 1.5s linear infinite alternate;
+  animation: rotate-20 1.5s linear infinite alternate;
 }
 .poke__main:hover{
   cursor: pointer;
@@ -180,7 +180,7 @@ body {
     background-color: rgb(255, 0, 0);     
   }
 }
-@keyframes rotate-90-cw {
+@keyframes rotate-20 {
   0% {
      transform: rotate(20deg);
   }

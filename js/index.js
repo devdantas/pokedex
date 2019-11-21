@@ -50,9 +50,7 @@ function verifica(res){
 }
 
 function createCard(res) {
-    let card = []
-    let icon = []
-    let i=0
+    let card = [], icon = [], i=0
     for (const item of res) {
       if(i%6 == 0){
         for (const itemTy of item.type) {
@@ -80,7 +78,12 @@ function bodyItem(icon, itemImg, itemName){
               <h2>${itemName}</h2>
             </div>
             <div class="poke__attr">
-              ${icon}
+            <div class="pokeball pokeball__wtwo">          
+              <div class="poke__red"></div>          
+                <div class="poke__black">
+                  <div class="circle__two "></div>
+                </div>
+              </div>
             </div>            
         </div>`
   return body  
