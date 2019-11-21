@@ -2,10 +2,11 @@ let search = document.querySelector("#search")
 let button = document.querySelector("#go")
 let container = document.querySelector("#container")
 let loading = document.querySelector(".loading")
+let modal = document.querySelector("#modal")
 
-const lista = []
+let lista = []
 
-const getJSON = async (req, res) => {
+function getAPI(){
   var URL = 'https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json';
   var request = new XMLHttpRequest();
   request.open('GET', URL);
@@ -92,9 +93,15 @@ function bodyItem(itemImg, itemName){
   return body  
 }
 function openModal(name) {
-  /* let res = list(name)
-  console.log(res) */
-  console.log(name)
+  let res = lista.filter(item => {
+    return item.name.toLowerCase().includes(name.toLowerCase())
+  })
+  modal.classList.add('animation__scale')
+  modal.style.display = 'flex'
+  let i = setInterval(() => {
+    clearInterval(i)    
+    modal.innerHTML = ""
+  }, 1200);
 }
 
-button.onclick = getJSON
+button.onclick = getAPI

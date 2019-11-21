@@ -6,7 +6,6 @@ body {
   color: rgba(0, 0, 0, 0.5);
 }
 .input__search {
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -145,16 +144,16 @@ body {
 }
 
 /* modal */
-.modal {
-  width: 30%;
-  height: 50vh;
+#modal {
   display: none;
   background-color: white;
   border-radius: 5px;
   align-self: center;
   position: absolute;
   z-index: 2;
-  top: 150px;
+  top: 120px;
+  overflow:hidden;
+  animation: bond 1.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
 }
 
 .shadow {
@@ -172,6 +171,9 @@ body {
 /* animation class */
 .animation__bounce {  
   animation: bounce 2.5s infinite;
+}
+.animation__360 {
+  animation: rotate-360 .75s linear infinite;    
 }
 
 @keyframes bounce {
@@ -200,3 +202,33 @@ body {
      transform: rotate(-20deg);
   }
 }
+@keyframes rotate-360 {
+  0% {
+     transform: rotate(0);
+  }
+  100% {
+     transform: rotate(360deg);
+  }
+}
+@keyframes bond {
+  0% {
+    transform:translateX(200px);
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+  }
+  80% {
+    transform:translateX(0px);
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+  }
+  100% {
+    border-radius:3px;
+    width: 50%;
+    height: 65%;
+
+  }
+}
+
+
