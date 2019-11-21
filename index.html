@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="index.js" defer></script>
+  <title>Pokedex</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="content">
+    <div class="input__search">
+      <div class="poke__logo">
+        <img src="img/International_Pokémon_logo.png" width="300" height="100">
+      </div>
+      <div class="poke__search">
+        <input type="text" id="search" placeholder="Pesquisar com ID ou Nome do Pokemon">
+        <button type="button" id="go" onclick="get">GO</button>
+      </div>
+    </div>
+    <div class="loading">   
+      <div class="pokeball">          
+        <div class="poke__red"></div>          
+        <div class="poke__black">
+          <div class="circle__w"></div>
+        </div>
+      </div>     
+      <div class="shadow"></div>
+    </div>
+    <div id="container">
+      <!-- complete with api -->      
+    </div>
+  </div>
+</body>
+
+</html>
