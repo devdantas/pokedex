@@ -38,7 +38,7 @@ body {
   width: 100%;
   height: 100%;
   display: flex; 
-  flex-flow: row wrap;
+  flex-flow: column wrap;
 }
 
 #container {
@@ -102,8 +102,6 @@ body {
   width: 30px;
   height: 30px;
 }
-
-
 .pokeball .poke__red {
   width: 100%;
   height: 50%;  
@@ -135,6 +133,7 @@ body {
   border: 3px solid black;
 }
 
+/* adicionando quando aparecer as keyframes */
 .poke__main:hover .circle__two {
   animation: fa-blink 1.5s linear infinite;
 }
@@ -143,6 +142,19 @@ body {
 }
 .poke__main:hover{
   cursor: pointer;
+}
+
+/* modal */
+.modal {
+  width: 30%;
+  height: 50vh;
+  display: none;
+  background-color: white;
+  border-radius: 5px;
+  align-self: center;
+  position: absolute;
+  z-index: 2;
+  top: 150px;
 }
 
 .shadow {

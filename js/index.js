@@ -3,6 +3,8 @@ let button = document.querySelector("#go")
 let container = document.querySelector("#container")
 let loading = document.querySelector(".loading")
 
+const lista = []
+
 const getJSON = async (req, res) => {
   var URL = 'https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json';
   var request = new XMLHttpRequest();
@@ -11,21 +13,22 @@ const getJSON = async (req, res) => {
   request.send();
 
   request.onload = function() {
-    list(request.response.pokemon)
+    lista = request.response.pokemon
+    list(lista, search.value)
   }
 }
 
-const list = (param) => {
-  switch (isNaN(search.value)) {
+const list = (param, search) => {
+  switch (isNaN(search)) {
     case true:
       res = param.filter(item => {
-        return item.name.toLowerCase().includes(search.value.toLowerCase())
+        return item.name.toLowerCase().includes(search.toLowerCase())
       })
       verifica(res)
       break;
     case false:
       res = param.filter(item => {
-        return item.num.toLowerCase().includes(search.value.toLowerCase())
+        return item.num.toLowerCase().includes(search.toLowerCase())
       })
       verifica(res)
       break;
@@ -56,13 +59,13 @@ function createCard(res) {
         for (const itemTy of item.type) {
           icon.push(`<img src="./img/icons_type/Icon_${itemTy}.png" class="icon__type">`)
         }
-        card.push('<div class="break"></div>' + bodyItem(icon, item.img, item.name))
+        card.push('<div class="break"></div>' + bodyItem(item.img, item.name))
           icon = []
       }else{
         for (const itemTy of item.type) {
           icon.push(`<img src="./img/icons_type/Icon_${itemTy}.png" class="icon__type">`)
         }
-        card.push(bodyItem(icon, item.img, item.name))
+        card.push(bodyItem(item.img, item.name))
         icon = []
       }
       i++      
@@ -70,9 +73,9 @@ function createCard(res) {
     return card
 }
 
-function bodyItem(icon, itemImg, itemName){
+function bodyItem(itemImg, itemName){
   let body = "";
-  body = `<div class="poke__main">
+  body = `<div class="poke__main" id="${itemName}" onclick="openModal('${itemName}')">
           <img src="${itemImg}" alt="Sprite of ${itemName}" class="poke__photo">  
             <div class="poke__name">
               <h2>${itemName}</h2>
@@ -87,6 +90,11 @@ function bodyItem(icon, itemImg, itemName){
             </div>            
         </div>`
   return body  
+}
+function openModal(name) {
+  /* let res = list(name)
+  console.log(res) */
+  console.log(name)
 }
 
 button.onclick = getJSON
