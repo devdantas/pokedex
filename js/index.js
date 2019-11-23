@@ -6,6 +6,9 @@ let modal = document.querySelector("#modal")
 
 let lista = []
 
+window.onload = function() {
+  modal.innerHTML = bodyModal(null, false)
+}
 function getAPI(){
   var URL = 'https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json';
   var request = new XMLHttpRequest();
@@ -92,6 +95,29 @@ function bodyItem(itemImg, itemName){
         </div>`
   return body  
 }
+
+function bodyModal(res, bool) {
+  let contentModal = ""
+  if(bool){
+    contentModal = `
+        <div class="modal__close" onclick="closeModal()">
+          X
+        </div>
+        <div class="modal__container">
+        </div>`
+  } else {    
+    modal.style.display = 'none'
+    modal.style.padding = '0'
+    contentModal = `<div id="pokeball__modal" class="pokeball pokeball__wone animation__360">          
+                      <div class="poke__red"></div>          
+                      <div class="poke__black">
+                        <div class="circle__one"></div>
+                      </div>
+                    </div>`
+  }
+  return contentModal
+}
+
 function openModal(name) {
   let res = lista.filter(item => {
     return item.name.toLowerCase().includes(name.toLowerCase())
@@ -99,9 +125,13 @@ function openModal(name) {
   modal.classList.add('animation__scale')
   modal.style.display = 'flex'
   let i = setInterval(() => {
-    clearInterval(i)    
-    modal.innerHTML = ""
+    clearInterval(i)
+    modal.style.padding = '15px'
+    modal.innerHTML = bodyModal(res[0], true)
   }, 1200);
+}
+function closeModal() {
+  modal.innerHTML = bodyModal(res, false)
 }
 
 button.onclick = getAPI
