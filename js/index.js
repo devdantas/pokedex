@@ -57,20 +57,12 @@ function verifica(res){
 }
 
 function createCard(res) {
-    let card = [], icon = [], i=0
+    let card = [], i=0
     for (const item of res) {
       if(i%6 == 0){
-        for (const itemTy of item.type) {
-          icon.push(`<img src="./img/icons_type/Icon_${itemTy}.png" class="icon__type">`)
-        }
         card.push('<div class="break"></div>' + bodyItem(item.img, item.name))
-          icon = []
       }else{
-        for (const itemTy of item.type) {
-          icon.push(`<img src="./img/icons_type/Icon_${itemTy}.png" class="icon__type">`)
-        }
         card.push(bodyItem(item.img, item.name))
-        icon = []
       }
       i++      
     }
@@ -82,7 +74,7 @@ function bodyItem(itemImg, itemName){
   body = `<div class="poke__main" id="${itemName}" onclick="openModal('${itemName}')">
           <img src="${itemImg}" alt="Sprite of ${itemName}" class="poke__photo">  
             <div class="poke__name">
-              <h2>${itemName}</h2>
+              <h3>${itemName}</h3>
             </div>
             <div class="poke__attr">
             <div class="pokeball pokeball__wtwo">          
@@ -99,11 +91,9 @@ function bodyItem(itemImg, itemName){
 function bodyModal(res, bool) {
   let contentModal = ""
   if(bool){
+    document.querySelector("#shadow__modal").style.display = "block" 
     contentModal = `
-        <div class="modal__close" onclick="closeModal()">
-          X
-        </div>
-        <div class="modal__container">
+        <div class="modal__container">  
           <div class="modal__header">                  
             <div class="modal__close">
               <span onclick="closeModal()">X</span>
@@ -146,8 +136,8 @@ function bodyModal(res, bool) {
           </div>
         </div>`
   } else {    
+    document.querySelector("#shadow__modal").style.display = "none"
     modal.style.display = 'none'
-    modal.style.padding = '0'
     contentModal = `<div id="pokeball__modal" class="pokeball pokeball__wone animation__360">          
                       <div class="poke__red"></div>          
                       <div class="poke__black">
@@ -166,12 +156,69 @@ function openModal(name) {
   modal.style.display = 'flex'
   let i = setInterval(() => {
     clearInterval(i)
-    modal.style.padding = '15px'
     modal.innerHTML = bodyModal(res[0], true)
   }, 1200);
 }
 function closeModal() {
   modal.innerHTML = bodyModal(res, false)
+}
+
+function bodyIcon(icons){
+  let bodyIcon = []
+  bodyIcon.push('<div class="icon__type">')
+  for (const icon of icons) {
+    bodyIcon.push(`
+      <div class="icon__name">
+        <label>${icon}</label>
+      </div>
+      <div class="icon__img">
+        <img src="./img/icons_type/Icon_${icon}.png" alt="Type ${icon}">
+      </div>
+    `)
+  }
+  bodyIcon.push('</div>')
+  return bodyIcon
+}
+
+function evolution(nextE, prevE) {
+  bodyEv = ""
+  if(nextE != null && prevE != null){
+    bodyEv = nextEvolution(nextE) + prevEvolution(prevE)
+  } else if(nextE != null && prevE == null) {
+    bodyEv = nextEvolution(nextE)
+  } else if(prevE != null && nextE == null){
+    console.log(bodyEv)
+    bodyEv = prevEvolution(prevE)
+  }
+  return bodyEv.toString().replace(/,/g, "")
+}
+
+function nextEvolution(nextE) {
+  let next = []
+  next.push('<div class="poke__item"><label>Next Evolution</label>')
+    for (const item of nextE) { 
+      next.push(`<div class="poke__np" onclick="openAndClose('${item.name}')">${item.name}</div>`)
+    }  
+  next.push('</div>')
+  return next
+}
+
+function prevEvolution(prevE) {
+  let prev = []
+  prev.push('<div class="poke__item"><label>Previous Evolution</label>')
+    for (const item of prevE) { 
+      prev.push(`<div class="poke__np" onclick="openAndClose('${item.name}')">${item.name}</div>`)
+    }
+  prev.push('</div>')
+  return prev
+}
+
+function openAndClose(name) {
+  closeModal()
+  let i = setTimeout(() => {
+    clearTimeout(i)
+    openModal(name)
+  }, 100);
 }
 
 button.onclick = getAPI
