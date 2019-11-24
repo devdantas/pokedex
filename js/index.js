@@ -104,6 +104,46 @@ function bodyModal(res, bool) {
           X
         </div>
         <div class="modal__container">
+          <div class="modal__header">                  
+            <div class="modal__close">
+              <span onclick="closeModal()">X</span>
+            </div>
+            <div class="poke__number">
+              Nº${res.num}
+            </div>     
+            <img src="${res.img}" alt="Sprite of ${res.name}" class="poke__photo">
+            <div class="poke__name">
+              ${res.name}
+            </div>        
+          </div>
+          <div class="modal__body">
+            <div class="poke__status">
+              status
+            </div>
+            <div class="poke__body">
+              <div class="poke__item">
+                <label>Type</label>
+                ${bodyIcon(res.type).toString().replace(/,/g,"")}
+              </div>
+              <div class="poke__item">
+                <label>Weight</label>
+                ${res.weight}
+              </div>
+              <div class="poke__item">
+                <label>Height</label>
+                ${res.height}
+              </div>
+              <div class="poke__item">
+                <label>Weaknesses</label>
+                ${bodyIcon(res.weaknesses).toString().replace(/,/g,"")}
+              </div>
+              <div class="poke__previous__next" style="">
+            `
+            + evolution(res.next_evolution, res.prev_evolution) +
+            `
+              </div>
+            </div>            
+          </div>
         </div>`
   } else {    
     modal.style.display = 'none'
