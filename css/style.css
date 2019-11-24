@@ -2,8 +2,8 @@ body {
   height: auto;
   padding: 0;
   margin: 0;
+  font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg,#4ab583 0,#266378 80%);
-  color: rgba(0, 0, 0, 0.5);
 }
 .input__search {
   display: flex;
@@ -63,7 +63,8 @@ body {
   background-color: white;
   border-radius: 5px;
   margin: 5px;
-  padding: 3px;
+  padding: 3px;  
+  color: rgba(0, 0, 0, 0.5);
 }
 .poke__main img {
   width: 120px;
@@ -144,18 +145,127 @@ body {
 }
 
 /* modal */
+#shadow__modal {
+  display: none;
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2;
+}
+
 #modal {
   display: none;
+  flex-direction: column;
   background-color: white;
   border-radius: 5px;
   align-self: center;
   position: absolute;
-  z-index: 2;
-  top: 120px;
+  z-index: 3;
+  top: 80px;
   overflow:hidden;
   animation: bond 1.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
 }
 
+#modal .modal__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#modal .modal__container .modal__close {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  cursor: pointer;
+}
+
+#modal .modal__container span {
+  padding: 10px;
+  font-size: 15pt;
+  color: white;
+}
+
+#modal .modal__container .modal__header {
+  width: 100%;
+  background: linear-gradient(135deg,#4ab583 0,#266378 80%);
+  display: flex;
+  flex-direction: column;
+}
+
+#modal .modal__container .modal__header img{
+  width: 120px;
+  height: 120px;
+  padding-bottom: 10px;
+  align-self: center;
+}
+#modal .modal__container .modal__header .poke__name, .poke__number {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  font-size: 12pt;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 70px;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+#modal .modal__container .modal__body .poke__status{
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  font-size: 13pt;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 70px;
+  padding: 5px;
+  text-transform: uppercase;
+}
+
+#modal .modal__container .modal__body .poke__body{
+  display: flex;
+  justify-content: space-evenly;
+  flex-flow: row wrap;
+}
+#modal .modal__container .modal__body .poke__body .poke__item {
+  display: flex;
+  flex-direction: column;
+  padding: 7px;
+}
+#modal .modal__container .modal__body .poke__body .poke__item .icon__type{
+  display: flex;
+  flex-flow: row-reverse wrap;
+  justify-content: flex-end;
+  font-size: 10pt;
+}
+#modal .modal__container .modal__body .poke__body .poke__previous__next{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  font-size: 10pt;
+}
+#modal .modal__container .modal__body .poke__body .poke__np{
+  color: white;
+  background: #266378;
+  border-radius: 25px;
+  margin: 2px;
+}
+#modal .modal__container .modal__body .poke__body .poke__np:hover{
+  background: #4ab583;
+  cursor: pointer;
+}
+#modal .modal__container .modal__body .poke__body .poke__item .icon__type .icon__name{
+  padding: 4px;
+}
+
+#modal .modal__container .modal__body .poke__item .icon__type .icon__img img{
+  width: 25px;
+  height: 25px;
+}
+
+/* sombra abaixo da pokeball */
 .shadow {
   width: 80px;
   height: 30px;
@@ -225,9 +335,8 @@ body {
   }
   100% {
     border-radius:3px;
-    width: 50%;
-    height: 65%;
-
+    width: 30%;
+    height: auto;
   }
 }
 
