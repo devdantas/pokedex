@@ -9,7 +9,8 @@ let lista = []
 window.onload = function() {
   modal.innerHTML = bodyModal(null, false)
 }
-function getAPI(){
+function getAPI(e){
+  e.preventDefault()
   var URL = 'https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json';
   var request = new XMLHttpRequest();
   request.open('GET', URL);
@@ -71,7 +72,8 @@ function createCard(res) {
 
 function bodyItem(itemImg, itemName){
   let body = "";
-  body = `<div class="poke__main" id="${itemName}" onclick="openModal('${itemName}')">
+  body = `
+        <div class="poke__main" id="${itemName}" onclick="openModal('${itemName}')">
           <img src="${itemImg}" alt="Sprite of ${itemName}" class="poke__photo">  
             <div class="poke__name">
               <h3>${itemName}</h3>
@@ -84,7 +86,8 @@ function bodyItem(itemImg, itemName){
                 </div>
               </div>
             </div>            
-        </div>`
+        </div>
+      `
   return body  
 }
 
@@ -156,6 +159,7 @@ function openModal(name) {
   modal.style.display = 'flex'
   let i = setInterval(() => {
     clearInterval(i)
+    window.scrollTo(0,0)
     modal.innerHTML = bodyModal(res[0], true)
   }, 1200);
 }
